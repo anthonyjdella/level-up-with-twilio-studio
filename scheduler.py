@@ -43,4 +43,4 @@ def cancel_message(message_sid):
     print(message.status)
 
 
-schedule_message('This will be sent in 15 minutes')
+schedule_message('Good morning!')

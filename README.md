@@ -16,6 +16,10 @@ If you'd like, you can watch the webinar for FREE here: Level Up With Twilio Stu
 [![Intro to Studio](/assets/twilio_studio.png)](https://youtu.be/14FXnUgrZ6w)
 
 
+## FAQ
+For Frequently Asked Questions, look [here](/FAQ.md).
+
+
 ## Links
 Check out useful links [here](/LINKS.md).
 
