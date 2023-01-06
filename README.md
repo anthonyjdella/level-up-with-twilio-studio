@@ -16,5 +16,9 @@ If you'd like, you can watch the webinar for FREE here: Level Up With Twilio Stu
 [![Intro to Studio](/assets/twilio_studio.png)](https://youtu.be/14FXnUgrZ6w)
 
 
+## Links
+Check out useful links [here](/LINKS.md).
+
+
 ## Contact
 If you'd like to learn more, reach out to me [@anthonyjdella](https://twitter.com/anthonyjdella).
