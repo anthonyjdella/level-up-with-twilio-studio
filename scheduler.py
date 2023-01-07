@@ -38,9 +38,14 @@ def schedule_message(body):
 # Cancel a scheduled message
 def cancel_message(message_sid):
     message = client.messages(message_sid) \
-    .update(status='canceled')
-
+        .update(
+            status='canceled'
+        )
     print(message.status)
 
 
-schedule_message('Good morning!')
+# def trigger_flow():
+#     pass
+
+
+# schedule_message("Good morning! Let's all stand up!")
