@@ -18,9 +18,10 @@ If you'd like, you can watch the webinar for FREE here: Level Up With Twilio Stu
 
 ## Run
 
-1. Run the app `python3 app.py` to deploy on `localhost:3000`
-2. In a separate terminal run `ngrok http 3000` (or in my case `ngrok http --region=us --hostname=ngrok.anthonydellavecchia.com 3000`)
-3. In a seperate terminal run `python3 trigger.py`
+1. Run `python3 app.py` to deploy on `localhost:3000`
+2. In a separate terminal, run `ngrok http 3000` 
+    - Or in my case `ngrok http --region=us --hostname=ngrok.anthonydellavecchia.com 3000`
+3. In a seperate terminal, run `python3 trigger.py`
 
 
 ## FAQ
