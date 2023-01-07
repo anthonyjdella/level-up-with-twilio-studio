@@ -5,12 +5,9 @@ from scheduler import schedule_message
 app = Flask(__name__)
 
 
-@app.route("/stand-up", methods=["GET"])
+@app.route("/sit-down", methods=["GET"])
 def good_morning_sms():
-    print("Starting schedule!")
-    schedule_message("Good morning! Let's all stand up!")
-    print("Finished schedule!")
-    return "Hello, world 2!"
+    return schedule_message("Good morning! It's time for daily sit-down!", 16)
 
 
 if __name__ == "__main__":
