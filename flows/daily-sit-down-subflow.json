@@ -1,0 +1,226 @@
+{
+    "description": "Daily Sit-Down Continued",
+    "states": [
+        {
+            "name": "Trigger",
+            "type": "trigger",
+            "transitions": [
+                {
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "incomingCall"
+                },
+                {
+                    "event": "incomingConversationMessage"
+                },
+                {
+                    "event": "incomingRequest"
+                },
+                {
+                    "next": "var_name",
+                    "event": "incomingParent"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "name": "var_name",
+            "type": "set-variables",
+            "transitions": [
+                {
+                    "next": "yesterday",
+                    "event": "next"
+                }
+            ],
+            "properties": {
+                "variables": [
+                    {
+                        "value": "{{trigger.parent.parameters.name}}",
+                        "key": "name"
+                    }
+                ],
+                "offset": {
+                    "x": 110,
+                    "y": 300
+                }
+            }
+        },
+        {
+            "name": "yesterday",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "today",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 200,
+                    "y": 530
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "{{flow.variables.name}} what did you do yesterday?",
+                "timeout": "3600"
+            }
+        },
+        {
+            "name": "today",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "impediments",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 280,
+                    "y": 820
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "{{flow.variables.name}} what will you do today?",
+                "timeout": "3600"
+            }
+        },
+        {
+            "name": "impediments",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "var_input",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 340,
+                    "y": 1090
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "{{flow.variables.name}} what impediments do you have?",
+                "timeout": "3600"
+            }
+        },
+        {
+            "name": "var_input",
+            "type": "set-variables",
+            "transitions": [
+                {
+                    "next": "save_to_airtable",
+                    "event": "next"
+                }
+            ],
+            "properties": {
+                "variables": [
+                    {
+                        "value": "{{ \"now\" | date: \"%Y-%m-%d\" }}",
+                        "key": "date"
+                    },
+                    {
+                        "value": "{{contact.channel.address}}",
+                        "key": "number"
+                    },
+                    {
+                        "value": "{{widgets.yesterday.inbound.Body}}",
+                        "key": "yesterday"
+                    },
+                    {
+                        "value": "{{widgets.today.inbound.Body}}",
+                        "key": "today"
+                    },
+                    {
+                        "value": "{{widgets.impediments.inbound.Body}}",
+                        "key": "impediments"
+                    }
+                ],
+                "offset": {
+                    "x": 400,
+                    "y": 1340
+                }
+            }
+        },
+        {
+            "name": "save_to_airtable",
+            "type": "run-function",
+            "transitions": [
+                {
+                    "event": "success"
+                },
+                {
+                    "event": "fail"
+                }
+            ],
+            "properties": {
+                "service_sid": "ZS63b5029bbf9e7d5774178f813d64099b",
+                "environment_sid": "ZEd622bccd403b470aa80bcb073640cf51",
+                "offset": {
+                    "x": 500,
+                    "y": 1590
+                },
+                "function_sid": "ZH16ebb3e78c89a8e18aeb2ccf629e878e",
+                "parameters": [
+                    {
+                        "value": "{{flow.variables.number}}",
+                        "key": "number"
+                    },
+                    {
+                        "value": "{{flow.variables.date}}",
+                        "key": "date"
+                    },
+                    {
+                        "value": "{{flow.variables.yesterday}}",
+                        "key": "yesterday"
+                    },
+                    {
+                        "value": "{{flow.variables.today}}",
+                        "key": "today"
+                    },
+                    {
+                        "value": "{{flow.variables.impediments}}",
+                        "key": "impediments"
+                    },
+                    {
+                        "value": "{{flow.variables.name}}",
+                        "key": "name"
+                    }
+                ],
+                "url": "https://serverless-7546.twil.io/write-to-airtable"
+            }
+        }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+        "allow_concurrent_calls": true
+    }
+}
