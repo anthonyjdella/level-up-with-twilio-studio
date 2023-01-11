@@ -20,21 +20,20 @@ print(datetime.utcnow())
 
 
 # Schedule a message to be sent at a fixed time
-def schedule_message(body, minutes_ahead):
+def schedule_message(to_number, body, minutes_ahead):
     try:
         message = client.messages \
             .create(
                 messaging_service_sid=os.getenv('TWILIO_MSG_SRVC_SID'),
-                to=os.getenv('MY_PERSONAL_NUMBER'),
+                to=to_number,
                 body=body,
                 send_at=minutes_from_now(minutes_ahead),
-                schedule_type='fixed'
+                schedule_type='fixed',
+                # status_callback='https://ngrok.anthonydellavecchia.com/v1/message/status', This is the URL that Twilio will send a request to when the message status is updated
             )
         print(message.sid)
-        return message.sid
     except TwilioRestException as e:
         print(e)
-        return e
 
 
 # Scheduled message must be be sent in between 15 minutes (901 seconds) to 7 days in the future
@@ -58,4 +57,6 @@ def cancel_message(message_sid):
         print(e)
 
 
-# schedule_message("Good morning! Let's all stand up!")
+# cancel_message("SMXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+
+# schedule_message("+1XXXXXXXXXX", "Good morning! Let's all stand up!", 16)
