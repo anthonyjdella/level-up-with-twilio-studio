@@ -32,4 +32,4 @@ def get_names_numbers():
 
 
 # print(get_unique_numbers())
-# > {'+14693470960', '+19723027812'}
+# > {'+1XXXXXXXXXX', '+1XXXXXXXXXX'}
