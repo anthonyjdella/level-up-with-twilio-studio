@@ -29,7 +29,8 @@ def schedule_message(to_number, body, minutes_ahead):
                 body=body,
                 send_at=minutes_from_now(minutes_ahead),
                 schedule_type='fixed',
-                # status_callback='https://ngrok.anthonydellavecchia.com/v1/message/status', This is the URL that Twilio will send a request to when the message status is updated
+                # status_callback='https://ngrok.anthonydellavecchia.com/v1/message/status', \
+                # This is the URL that Twilio will send a request to when the message status is updated
             )
         print(message.sid)
     except TwilioRestException as e:
