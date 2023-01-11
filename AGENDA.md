@@ -1,11 +1,13 @@
-# Level Up Twilio Studio
+# Level Up with Twilio Studio: Protoype, enhance, and share your Workflows
+
 
 ## Anthony Intro
 
 - [ ] Good morning 🌅
 - [ ] Developer Evangelist 🗣️
-- [ ] Overview 🚧
 - [ ] Previous Recording 📹
+- [ ] Agenda 🚧
+
 
 ## Twilio Recap
 
@@ -17,13 +19,43 @@
 - [ ] What is Serverless? 🤖
 - [ ] Why use Studio? ❓
 
-## Code (yuck!)
 
-- [ ] We lied 🤥
-- [ ] Focus on Business Logic 😃
-- [ ] Serverless
-- [ ] Statelessness
+## App Idea
 
-## Studio (yay!)
+- [ ] Story 🏰
+- [ ] Problem 🦹‍♂️
+    - [ ] Scheduled Meeting 👪
+    - [ ] Standing 🧍
+    - [ ] That one co-worker who can't stop talking 😡
+- [ ] Solution 🦸
 
-- []
+
+## Studio Recap
+
+- [ ] Buy a Number ☎️
+    - [ ] A2P 10DLC ⚖️
+- [ ] Create a Flow 〰️
+- [ ] Terminology
+    - [ ] Flow 〰️
+    - [ ] Canvas 🖌️
+    - [ ] Widgets 💡
+    - [ ] Trigger 🔫
+- [ ] Concepts
+    - [ ] Execution ✅
+    - [ ] State 🇺🇸
+    - [ ] Publish 📖
+
+
+## Prototype
+
+- [ ] Logs 💾
+
+
+## Enhance
+
+- [ ] Enhance
+
+
+## Share
+
+- [ ] Share
