@@ -1,12 +1,14 @@
-# Level Up with Twilio Studio: Protoype, enhance, and share your Workflows
-On January 24, 2023, for a [Twilio Webinar](https://www.twilio.com/events), I presented a workshop about [Twilio Studio](https://www.twilio.com/en-us/serverless/studio).
+# Level Up with Twilio Studio: Prototype, enhance, and share your Workflows
+On January 24, 2023, for a [Twilio Webinar](https://interactive.twilio.com/level-up-with-studio-prototype-enhance-and-share-your-workflows-webinar), I presented a workshop about [Twilio Studio](https://www.twilio.com/en-us/serverless/studio).
 
-This repo contains the accompanying code for that webinar.
+This repo contains the accompanying code & resources for that webinar.
 
 
 ## Video Recording
-If you'd like, you can watch the webinar for FREE here: # Level Up with Twilio Studio: Protoype, enhance, and share your Workflows
+If you'd like, you can watch the webinar for FREE here: [Level Up with Twilio Studio: Prototype, enhance, and share your Workflows](https://interactive.twilio.com/level-up-with-studio-prototype-enhance-and-share-your-workflows-webinar)
 > Just sign up with an email address and Twilio will send you the link
+
+For the Agenda, check [AGENDA.md](/AGENDA.md)
 
 
 ## About Studio
@@ -25,11 +27,11 @@ If you'd like, you can watch the webinar for FREE here: # Level Up with Twilio S
 
 
 ## FAQ
-For Frequently Asked Questions, look [here](/FAQ.md).
+For Frequently Asked Questions, look at [FAQ.md](/FAQ.md).
 
 
 ## Links
-Check out useful links [here](/LINKS.md).
+Check out useful links at [LINKS.md](/LINKS.md).
 
 
 ## Contact
