@@ -1,4 +1,4 @@
-# Level Up with Twilio Studio: Protoype, enhance, and share your Workflows
+# Level Up with Twilio Studio: Prototype, enhance, and share your Workflows
 
 
 ## Anthony Intro
@@ -12,11 +12,11 @@
 ## Twilio Recap
 
 - [ ] What is Twilio? ☎️
-- [ ] What is Customer Engagement? 🛂
-- [ ] What is a Communication API? 📲
+    - [ ] What is Customer Engagement? 🛂
+    - [ ] What is a Communication API? 📲
 - [ ] What is Twilio Studio? 📈
-- [ ] What is Low/No Code? ❌
-- [ ] What is Serverless? 🤖
+    - [ ] What is Low/No Code? ❌
+    - [ ] What is Serverless? 🤖
 - [ ] Why use Studio? ❓
 
 
@@ -39,16 +39,18 @@
     - [ ] Flow 〰️
     - [ ] Canvas 🖌️
     - [ ] Widgets 💡
+    - [ ] Transition 📊
     - [ ] Trigger 🔫
-- [ ] Concepts
-    - [ ] Execution ✅
-    - [ ] State 🇺🇸
-    - [ ] Publish 📖
 
 
 ## Prototype
 
-- [ ] Logs 💾
+- [ ] Concepts
+    - [ ] State 🇺🇸
+    - [ ] Publish 📖
+    - [ ] Test Users 🎓
+    - [ ] Execution ✅
+    - [ ] Logs 💾
 
 
 ## Enhance
