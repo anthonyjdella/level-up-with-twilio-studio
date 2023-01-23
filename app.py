@@ -10,12 +10,7 @@ from airtable import get_names_numbers
 app = Flask(__name__)
 
 
-@app.route("/v1/message/schedule", methods=["GET"])
-def good_morning_sms():
-    return schedule_message("Good morning! It's time for daily sit-down!", 16)
-
-
-@app.route("/v2/message/schedule", methods=["POST"])
+@app.route("/v1/message/schedule", methods=["POST"])
 def send_scheduled_texts_to_team_members():
     data = request.get_json()
     message = data.get("message")
