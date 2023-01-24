@@ -1,5 +1,5 @@
 # Level Up with Twilio Studio: Prototype, enhance, and share your Workflows
-On January 24, 2023, for a [Twilio Webinar](https://interactive.twilio.com/level-up-with-studio-prototype-enhance-and-share-your-workflows-webinar), I presented a workshop about [Twilio Studio](https://www.twilio.com/en-us/serverless/studio).
+On January 26, 2023, for a [Twilio Webinar](https://interactive.twilio.com/level-up-with-studio-prototype-enhance-and-share-your-workflows-webinar), I presented a workshop about [Twilio Studio](https://www.twilio.com/en-us/serverless/studio).
 
 This repo contains the accompanying code & resources for that webinar.
 

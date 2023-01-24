@@ -3,61 +3,61 @@
 
 ## Anthony Intro
 
-- [ ] Good morning 🌅
-- [ ] Developer Evangelist 🗣️
-- [ ] Previous Recording 📹
-- [ ] Agenda 🚧
+- [] Good morning 🌅
+- [] Developer Evangelist 🗣️
+- [] Previous Recording 📹
+- [] Agenda 🚧
 
 
 ## Twilio Recap
 
-- [ ] What is Twilio? ☎️
-    - [ ] What is Customer Engagement? 🛂
-    - [ ] What is a Communication API? 📲
-- [ ] What is Twilio Studio? 📈
-    - [ ] What is Low/No Code? ❌
-    - [ ] What is Serverless? 🤖
-- [ ] Why use Studio? ❓
+- [] What is Twilio? ☎️
+    - [] What is Customer Engagement? 🛂
+    - [] What is a Communication API? 📲
+- [] What is Twilio Studio? 📈
+    - [] What is Low/No Code? ❌
+    - [] What is Serverless? 🤖
+- [] Why use Studio? ❓
 
 
 ## App Idea
 
-- [ ] Story 🏰
-- [ ] Problem 🦹‍♂️
-    - [ ] Scheduled Meeting 👪
-    - [ ] Standing 🧍
-    - [ ] That one co-worker who can't stop talking 😡
-- [ ] Solution 🦸
+- [] Story 🏰
+- [] Problem 🦹‍♂️
+    - [] Scheduled Meeting 👪
+    - [] Standing 🧍
+    - [] That one co-worker who can't stop talking 😡
+- [] Solution 🦸
 
 
 ## Studio Recap
 
-- [ ] Buy a Number ☎️
-    - [ ] A2P 10DLC ⚖️
-- [ ] Create a Flow 〰️
-- [ ] Terminology
-    - [ ] Flow 〰️
-    - [ ] Canvas 🖌️
-    - [ ] Widgets 💡
-    - [ ] Transition 📊
-    - [ ] Trigger 🔫
+- [] Buy a Number ☎️
+    - [] A2P 10DLC ⚖️
+- [] Create a Flow 〰️
+- [] Terminology
+    - [] Flow 〰️
+    - [] Canvas 🖌️
+    - [] Widgets 💡
+    - [] Transition 📊
+    - [] Trigger 🔫
 
 
 ## Prototype
 
-- [ ] Concepts
-    - [ ] State 🇺🇸
-    - [ ] Publish 📖
-    - [ ] Test Users 🎓
-    - [ ] Execution ✅
-    - [ ] Logs 💾
+- [] Concepts
+    - [] State 🇺🇸
+    - [] Publish 📖
+    - [] Test Users 🎓
+    - [] Execution ✅
+    - [] Logs 💾
 
 
 ## Enhance
 
-- [ ] Enhance
+- [] Enhance
 
 
 ## Share
 
-- [ ] Share
+- [] Share
