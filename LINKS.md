@@ -1,6 +1,6 @@
 # Useful Links
 
-* [Airtable Base](https://airtable.com/shrm6Y826DGAa9MP3) used to store Stand Up data
+* [Airtable Base](https://airtable.com/shrgxvKyKIJ9pJItw) used to store Stand Up data
 * Watch the previous Level Up with Twilio Studio [recording](https://ahoy.twilio.com/devgen_webinar_levelup_twilio_studio_NAMER-1)
 * Register for [A2P 10DLC](https://support.twilio.com/hc/en-us/articles/1260801864489-How-do-I-register-to-use-A2P-10DLC-messaging-)
 * Twilio Studio [Developer Documentation](https://www.twilio.com/docs/studio)
