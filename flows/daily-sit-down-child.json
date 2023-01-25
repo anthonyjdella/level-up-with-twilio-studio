@@ -1,0 +1,304 @@
+{
+    "description": "Daily Sit-Down Child",
+    "states": [
+        {
+            "name": "Trigger",
+            "type": "trigger",
+            "transitions": [
+                {
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "incomingCall"
+                },
+                {
+                    "event": "incomingConversationMessage"
+                },
+                {
+                    "event": "incomingRequest"
+                },
+                {
+                    "next": "var_name",
+                    "event": "incomingParent"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "name": "var_name",
+            "type": "set-variables",
+            "transitions": [
+                {
+                    "next": "yesterday",
+                    "event": "next"
+                }
+            ],
+            "properties": {
+                "variables": [
+                    {
+                        "value": "{{trigger.parent.parameters.name}}",
+                        "key": "name"
+                    }
+                ],
+                "offset": {
+                    "x": 110,
+                    "y": 300
+                }
+            }
+        },
+        {
+            "name": "yesterday",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "today",
+                    "event": "incomingMessage"
+                },
+                {
+                    "next": "nothing",
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 200,
+                    "y": 530
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "{{flow.variables.name | upcase}} what did you do yesterday?",
+                "timeout": "120"
+            }
+        },
+        {
+            "name": "today",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "condition",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 280,
+                    "y": 820
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "{{flow.variables.name | upcase}} what will you do today?",
+                "timeout": "120"
+            }
+        },
+        {
+            "name": "impediments",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "var_input",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 480,
+                    "y": 1340
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "{{flow.variables.name | upcase}} what impediments do you have?",
+                "timeout": "120"
+            }
+        },
+        {
+            "name": "var_input",
+            "type": "set-variables",
+            "transitions": [
+                {
+                    "next": "save_to_airtable",
+                    "event": "next"
+                }
+            ],
+            "properties": {
+                "variables": [
+                    {
+                        "value": "{{ \"now\" | date: \"%Y-%m-%d\" }}",
+                        "key": "date"
+                    },
+                    {
+                        "value": "{{contact.channel.address}}",
+                        "key": "number"
+                    },
+                    {
+                        "value": "{{widgets.yesterday.inbound.Body}}",
+                        "key": "yesterday"
+                    },
+                    {
+                        "value": "{{widgets.today.inbound.Body}}",
+                        "key": "today"
+                    },
+                    {
+                        "value": "{{widgets.impediments.inbound.Body}}",
+                        "key": "impediments"
+                    }
+                ],
+                "offset": {
+                    "x": 660,
+                    "y": 1590
+                }
+            }
+        },
+        {
+            "name": "save_to_airtable",
+            "type": "run-function",
+            "transitions": [
+                {
+                    "event": "success"
+                },
+                {
+                    "event": "fail"
+                }
+            ],
+            "properties": {
+                "service_sid": "ZS5b8ee02ed8dd448a991fa6e32be80811",
+                "environment_sid": "ZEefcf969a02c4acaeba7b7d2eb4265377",
+                "offset": {
+                    "x": 930,
+                    "y": 1830
+                },
+                "function_sid": "ZHfb7c1300ed026315a54689e883238968",
+                "parameters": [
+                    {
+                        "value": "{{flow.variables.number}}",
+                        "key": "number"
+                    },
+                    {
+                        "value": "{{flow.variables.date}}",
+                        "key": "date"
+                    },
+                    {
+                        "value": "{{flow.variables.yesterday}}",
+                        "key": "yesterday"
+                    },
+                    {
+                        "value": "{{flow.variables.today}}",
+                        "key": "today"
+                    },
+                    {
+                        "value": "{{flow.variables.impediments}}",
+                        "key": "impediments"
+                    },
+                    {
+                        "value": "{{flow.variables.name}}",
+                        "key": "name"
+                    }
+                ],
+                "url": "https://daily-sit-down-4177.twil.io/write-to-airtable"
+            }
+        },
+        {
+            "name": "nothing",
+            "type": "send-message",
+            "transitions": [
+                {
+                    "next": "today",
+                    "event": "sent"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 810,
+                    "y": 570
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "to": "{{contact.channel.address}}",
+                "body": "Are you telling me you sat around doing nothing?"
+            }
+        },
+        {
+            "name": "condition",
+            "type": "split-based-on",
+            "transitions": [
+                {
+                    "next": "impediments",
+                    "event": "noMatch"
+                },
+                {
+                    "next": "same_thing",
+                    "event": "match",
+                    "conditions": [
+                        {
+                            "friendly_name": "If repeat answer",
+                            "arguments": ["{{widgets.today.inbound.Body}}"],
+                            "type": "equal_to",
+                            "value": "{{widgets.yesterday.inbound.Body}}"
+                        }
+                    ]
+                }
+            ],
+            "properties": {
+                "input": "{{widgets.today.inbound.Body}}",
+                "offset": {
+                    "x": 370,
+                    "y": 1080
+                }
+            }
+        },
+        {
+            "name": "same_thing",
+            "type": "send-message",
+            "transitions": [
+                {
+                    "next": "impediments",
+                    "event": "sent"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 1050,
+                    "y": 1150
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "to": "{{contact.channel.address}}",
+                "body": "Weren’t you working on that yesterday? Why aren’t you done yet?"
+            }
+        }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+        "allow_concurrent_calls": true
+    }
+}

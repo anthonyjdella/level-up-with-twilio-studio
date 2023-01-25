@@ -1,0 +1,240 @@
+{
+    "description": "Daily Sit-Down Parent",
+    "states": [
+        {
+            "name": "Trigger",
+            "type": "trigger",
+            "transitions": [
+                {
+                    "next": "validate_caller",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "incomingCall"
+                },
+                {
+                    "event": "incomingConversationMessage"
+                },
+                {
+                    "next": "schedule_multiple_messages",
+                    "event": "incomingRequest"
+                },
+                {
+                    "event": "incomingParent"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 0,
+                    "y": 0
+                }
+            }
+        },
+        {
+            "name": "schedule_multiple_messages",
+            "type": "make-http-request",
+            "transitions": [
+                {
+                    "event": "success"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 500,
+                    "y": 240
+                },
+                "method": "POST",
+                "content_type": "application/json;charset=utf-8",
+                "body": "{\n \"message\": \"Good morning! It's time for daily sit-down! Reply to enter.\"\n}",
+                "url": "https://ngrok.anthonydellavecchia.com/v1/message/schedule"
+            }
+        },
+        {
+            "name": "get_names",
+            "type": "make-http-request",
+            "transitions": [
+                {
+                    "next": "ask_questions",
+                    "event": "success"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": -200,
+                    "y": 540
+                },
+                "method": "GET",
+                "content_type": "application/x-www-form-urlencoded;charset=utf-8",
+                "parameters": [
+                    {
+                        "value": "{{contact.channel.address}}",
+                        "key": "caller"
+                    }
+                ],
+                "url": "https://ngrok.anthonydellavecchia.com/v1/users/names"
+            }
+        },
+        {
+            "name": "ask_questions",
+            "type": "run-subflow",
+            "transitions": [
+                {
+                    "next": "end",
+                    "event": "completed"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "flow_sid": "FW50120385f4d1e8dcf30c0bcd83695969",
+                "flow_revision": "LatestPublished",
+                "offset": {
+                    "x": -40,
+                    "y": 790
+                },
+                "parameters": [
+                    {
+                        "value": "{{widgets.get_names.parsed.name}}",
+                        "key": "name"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "validate_caller",
+            "type": "make-http-request",
+            "transitions": [
+                {
+                    "next": "get_names",
+                    "event": "success"
+                },
+                {
+                    "next": "invalid_user",
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": -230,
+                    "y": 210
+                },
+                "method": "POST",
+                "content_type": "application/json;charset=utf-8",
+                "body": "{\n\"caller\": \"{{contact.channel.address}}\"\n}",
+                "url": "https://ngrok.anthonydellavecchia.com/v1/users/validate"
+            }
+        },
+        {
+            "name": "invalid_user",
+            "type": "send-message",
+            "transitions": [
+                {
+                    "event": "sent"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 200,
+                    "y": 540
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "to": "{{contact.channel.address}}",
+                "body": "Daily Sit-Down is a sacred ritual, and you are not allowed to join."
+            }
+        },
+        {
+            "name": "end",
+            "type": "send-and-wait-for-reply",
+            "transitions": [
+                {
+                    "next": "press_1",
+                    "event": "incomingMessage"
+                },
+                {
+                    "event": "timeout"
+                },
+                {
+                    "event": "deliveryFailure"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 180,
+                    "y": 1060
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "body": "Thanks, {{widgets.ask_questions.name}} now get back to work.\n\nReply with 1 to view the Daily Sit-Down.",
+                "timeout": "600"
+            }
+        },
+        {
+            "name": "press_1",
+            "type": "split-based-on",
+            "transitions": [
+                {
+                    "event": "noMatch"
+                },
+                {
+                    "next": "airtable_link",
+                    "event": "match",
+                    "conditions": [
+                        {
+                            "friendly_name": "If value equal_to 1",
+                            "arguments": ["{{widgets.end.inbound.Body}}"],
+                            "type": "equal_to",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ],
+            "properties": {
+                "input": "{{widgets.end.inbound.Body}}",
+                "offset": {
+                    "x": 440,
+                    "y": 1310
+                }
+            }
+        },
+        {
+            "name": "airtable_link",
+            "type": "send-message",
+            "transitions": [
+                {
+                    "event": "sent"
+                },
+                {
+                    "event": "failed"
+                }
+            ],
+            "properties": {
+                "offset": {
+                    "x": 680,
+                    "y": 1590
+                },
+                "service": "{{trigger.message.InstanceSid}}",
+                "channel": "{{trigger.message.ChannelSid}}",
+                "from": "{{flow.channel.address}}",
+                "to": "{{contact.channel.address}}",
+                "body": "https://airtable.com/shrgxvKyKIJ9pJItw"
+            }
+        }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+        "allow_concurrent_calls": true
+    }
+}
